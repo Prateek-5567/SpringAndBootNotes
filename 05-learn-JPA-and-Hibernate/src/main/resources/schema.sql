@@ -1,0 +1,5 @@
+CREATE TABLE course (
+    id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL
+);
