@@ -1,0 +1,42 @@
+Internationalization - i18n shortform.
+
+Your rest-api might have consumers around the world.
+How do you customize it to users around the world : Internationalization.
+
+Typically accept header : Accept-Language is used
+		Accept-Language - indicates natural language and locale that user prefers.
+				eg : en - english (good morning)
+				     nl - Dutch  (Goedemorgen)
+				     fr - French (Bonjour)
+				     
+				     
+ messages.properties is where you mention you all languages for i18n.
+ 
+ I have done i18n in Hello world controller go check it out
+ 
+ for adding messages of diffrent langauges we define message.properties under src/main/resources.
+ 
+		
+to handle messages from messages.properties we create object of MessageSource class.
+ - MessageSource is interface for resolving messages, with support of parameterization and internationalization.
+ - exact name : messages.properties  (with s) 
+ How to get message :- 
+ messageSource.getMessage(null, null, null, null) : has 4 parameters
+ 			1st : messages code
+ 			2nd : if you have any variable to replace in the messages
+ 			3rd : Default Message
+ 			4th : locale : which locale are you using 
+ 			
+ 	Locale is a setting that defines a user’s language, country, and regional formatting rules.
+ 
+ 	Locale locale = LocaleContextHolder.getLocale();  // it gives you the locale associated with current thread.
+	if there is LocaleProvided then it would return default locale i.e en for me.
+	
+	if locale = en i.e default then it corresponds to message.properties by default.
+	if locale is fr then it corresponds to message_fr.properties
+	
+	
+ 	ContextHolder holds the current context of our application.
+ 	 
+ 
+  

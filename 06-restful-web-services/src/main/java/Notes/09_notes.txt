@@ -1,0 +1,75 @@
+# SPRING BOOT ACTUATOR
+-provides spring boot production ready features.
+- manage and monitor your application in production.
+
+group id : org.springframework.boot
+artifact id : spring-boot-starter-actuator 
+
+Provides a number of endpoints : 
+* bean : complete list of spring beans in your app
+* health : application health information.
+* mapings : details around request mapping.
+* metrics : application metrics
+
+
+goto : /actuator : 
+	{
+	  "_links": {
+	    "self": {
+	      "href": "http://localhost:8080/actuator",
+	      "templated": false
+	    },
+	    "health-path": {
+	      "href": "http://localhost:8080/actuator/health/{*path}",
+	      "templated": true
+	    },
+	    "health": {
+	      "href": "http://localhost:8080/actuator/health",
+	      "templated": false
+	    }
+	  }
+	}
+	
+goto : http://localhost:8080/actuator/metrics/http.server.requests
+
+check how many requests were sent to you server : localhost:8080,
+also diffrent uri's being hit 
+	{
+	  "name": "http.server.requests",
+	  "baseUnit": "seconds",
+	  "measurements": [
+	    {
+	      "statistic": "COUNT",
+	      "value": 9
+	    },
+	    {
+	      "statistic": "TOTAL_TIME",
+	      "value": 0.067889458
+	    },
+	    {
+	      "statistic": "MAX",
+	      "value": 0.006021708
+	    }
+	    ...
+	    
+	    
+	  # Exploring Rest Api using HAL explorer.
+	                             hypertext application lang.
+	   
+	1. HAL : simple format that gives you consistent and easy way to hyperlink between resources in your application.
+	
+	2. Hal explorer : an api explorer for restful hypermedia api using HAL 
+						enables your non tech team to play with api's
+						
+	3. Spring Boot HAL explorer : Auto configures HAL explorer for spring boot projects.
+	
+	grpID : org.springframework.data
+	artifactId : spring-boot-rest-hal-explorer
+	
+	now goto localhost:8080/ and hit enter - HAL Explorer opens.
+	 
+	gives real time interation with apis , their response bodies ,and links vgera...
+	
+	If your api is compeled with HAL you can use HAL explorer to explore the api.
+	
+	

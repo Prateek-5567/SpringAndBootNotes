@@ -1,0 +1,84 @@
+Coming to ADVANCED REST API FEATURES.
+	-DOCUMENTATION
+	-CONTENT NEGOTATION
+	-INTERNATIONALISATION - i18n
+	-VERSONING
+	-HATEOAS
+	-STATIC FILTERING
+	-DYNAMIC FILTERING
+	-MONITORING
+	
+YOUR REST API CONSUMER NEEDS TO UNDERSTAND YOUR REST API : 
+	- RESOURCES
+	- ACTIONS
+	- REQUEST/RESPONSE STRUCTURE (CONSTRAINTS/VALIDATIONS) 
+
+YOU HAVE TWO OPTIONS :
+	1: MANUALLY MAINTAIN DOCUMENTATION.
+		- additional efforts to keep it sync with code.
+	2: GENERATE THE DOCUMENTATION FROM CODE. ( FOCUS HERE)
+	
+GENERATING DOCUMENTATION FOR YOUR CODE.
+	REST API DOCUMENTATION - SWAGGER AND OPEN API.
+	
+	- SWAGGER SPEC. IS USED TO WRITE DOCUMENTATION.
+	
+1. What is OpenAPI?
+-> swagger specifications were converted to open Api spec. in 2016 but swagger tools continue to exists.
+OpenAPI Specification (OAS) is a language-agnostic standard for describing REST APIs.
+
+Defines endpoints, request/response formats, parameters, auth, and schemas in a machine-readable way.
+
+Written in YAML or JSON.
+
+Maintained by the OpenAPI Initiative (Linux Foundation).
+
+👉 In short: OpenAPI = the specification (standard).
+
+2. What is Swagger?
+
+It implements and works with OpenAPI.
+
+Used for documentation, testing, and client/server code generation.
+
+👉 In short: Swagger = tools built around OpenAPI.
+
+3. Swagger UI : visualize and interact with your rest api.
+
+eg : 
+{
+openapi: 3.0.1
+info:
+  title: User API
+  version: 1.0.0
+
+paths:
+  /users/{id}:
+    get:
+      summary: Get user by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+}

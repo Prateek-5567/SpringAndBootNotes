@@ -1,0 +1,65 @@
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+Just add this in pom.xml basic security ( Authorization ) gets applied to all urls(apis)
+
+-- everytime app restarts you need to log in to access any url.
+
+to use `talend api tester` now you need to add an authorization header
+
+there is an option to add it near headers 
+
+Problem : 
+with basic security configurations 
+Spring wont allow you to pass post requests .. 
+
+Spring will intercept post request and execute a series of filter called filterChains
+there is a series of checks done in filter chain : 
+	1.All requests should be authenticated.
+	2.if a request is not authenticated , user is redirected to login page.
+	3.Enable a check for CSRF -> that effects Post and Put requests. 
+	
+	
+What CSRF actually does : 
+
+CSRF (Cross-Site Request Forgery) protection in Spring Security:
+	Blocks state-changing requests unless a valid CSRF token is present.
+	State-changing = anything that modifies data.
+
+	That means:
+		POST
+		PUT
+		PATCH
+		DELETE
+		are affected.
+		
+		GET is not affected.
+				
+Why only these methods?
+
+Because by HTTP semantics:
+
+	Method	  	Meaning
+	GET			Read only
+	POST		Create
+	PUT			Update
+	DELETE		Remove
+
+CSRF attacks only make sense for write operations.
+
+
+ SO WE NEED TO COUSTOMIZE THE FILTER CHAIN OF SPRING SECURITY. 
+ 
+ WHAT DO WE WANT TO CHANGE IN FILTER CHAIN : 
+ 
+ 1. LOGIN PAGE : having a separate page for authentication is good but for rest-api
+ 			we can just have a pop-up being shown for authentication.
+ 	
+ 2. CSRF .
+ 
+-> in spring security even if we want to update a single property we need to define the entire filter chain again.
+ 	else the features like authentication etc. are left unimplemented.
+
+

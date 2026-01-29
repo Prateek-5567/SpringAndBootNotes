@@ -1,0 +1,66 @@
+You Have build and amazing REST API application
+	- you have 100s of consumers 
+	- and you need to implement a breaking change
+		eg : split name into firstName and lastName.
+		
+	we have two versions of response : 
+  older version 1 : {
+						"name" : "person"
+					}
+	new version 2 : {
+						"name" : {
+							"firstName" : "Bob",
+							"lastName"  : "Charlie"
+						}
+					} 
+if we want to shift from version1 to version2 we can not directly change the api otherwise all our users will 
+have to to update their code where they are using our api
+everyone gets affected
+thats why we should use versioning
+		
+		localhost:8080/v1/person - older users keep using.
+		localhost:8080/v2/person - those who know can update.
+		
+- Variety of options for versioning : 
+	URL
+	Request Parameter 
+	Header
+	Media Type
+	
+1. URL Versioning : here we use diffrent uri/url for diffrent versions released.
+
+2. Request Param - By Amazon 
+	when you fill some from then url becomes like ?name="aman"?age=10 etc 
+	so these values are Request Params;
+	params keyword or @RequestParam annotation are used to access params from url.
+	eg : done - VersioningPersonControlle.java
+
+Video : 146. Udemy.SpringBootCourse - 3 and 4 seems extra
+3. Header Versoning - microsoft 
+4. Media Type
+
+## NEW UPDATE from spring 4.0.x and java 25 onwards. 
+-> Versoning using Spring boot internal versoning.	
+	create -> VersoningPersonSbiController   ; Sbi- Spring boot implementation.
+	
+	@GetMapping(path="/{version}/person-sbi",version=2.0.1)  // spring boot uses symentic versoning - major release , minor release , patch release.
+	public PersonV2 getV2PersonUri() {
+		return new PersonV2(new Name("Nicholas","Henderson"));
+	}
+	
+	now you need to configure your versioning strategy in application.properties
+	
+	spring.mvc.apiversion.use-path-segment=0
+	
+    here  0  means first segment i.e localhost:8080/{this first segment tells apiversion}/...
+    
+    now goto localhost:8080/1.0.0/person-sbi   ->  and version 1 works.
+    or goto localhost:8080/1/person-sbi   ->  and version 1 works.
+    
+    similiarly version 2 , 3 .. 
+    
+how spring releases versions - 3.5.4 - major.minor.patch 
+
+    
+    
+    

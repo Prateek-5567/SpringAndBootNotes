@@ -1,0 +1,31 @@
+		# Content-Negotiation
+					{for now i have commented it in pom.xml uncomment to use.}
+					
+For Same Resource and Same URI diffrent Representations are possible:-
+	eg: Diffrent Content Type : XML or JSON etc.
+	eg: Diffrent Language : en , hindi , dutch , Cantonese...
+	
+How can consumer tell the REST API provider what they want : 
+	- through content negotiation
+	- here consumer and service provider negotiate with each other
+	- contracts are signed requirements are noted down.
+	
+check this out : 
+
+groupId : com.fasterxml.jackson.dataformat
+artifactId : jackson-dataformat-xml
+
+With jackson-dataformat-xml → JSON ↔ XML
+
+It allows Jackson to serialize Java objects to XML and
+ deserialize XML to Java objects. 
+we can interchange sending or receiving data between XML and
+ json using jackson-dataformat-xml Dependency.
+ 
+after adding this dependency goto : Talend Api tester
+	perform get request to /users
+	add HEADERS - 	NAME:VALUE
+	
+	for eg : name = ACCEPT , VALUE = test/xml 
+		now input data will be xml format.
+		

@@ -1,0 +1,44 @@
+Build a rest api for social media application
+Key Resources : 
+	Users
+	Posts
+
+key details :
+	User : Id,Name,DOB
+	Post : id,desc
+	
+Actions : 
+	User : Create Delete and Update A user.
+	Post : Create delete or update a Post.
+	
+Get Request   : when you type url the request that goes to DispatcherServelet is GET.
+			- GET is to retirieve details or other data from Backend to show it to user.
+Post Request  : To Create a new resource     eg. ADD TODO.
+			- here we need to send data to backend.
+			- following a Post a Get request will also be made to display corresponding results to user.
+Put Request   : Update an Existing Resource. eg. UPDATE TODO.
+Patch Request : Update just a Part of Existing Resource eg. update DOB of user.
+Delete Request: Delete a resource
+
+We will now design multiple RestApi for our applications
+	1. /users - provide all users.
+			Retrieve all users : Get  : /users
+			Retrieve one user  : Get  : /users/{id}  
+			Add new User 	   : Post : /users
+			delete a User 	   : Delete : /user/{id} 
+		Posts of a USER - Posts are tied to a user .
+			Retrieve all posts of a user 	: Get : /users/{id}/posts
+			Retrieve a post of a user		: Get : /users/{id}/posts/{postId}
+			Create a post for a user		: Post : /users/{id}/posts
+	
+	
+from our frontend code we make api call for Get,post,put,delete etc tasks onto specific api's.
+fetch data from database -> create an api and populate the data their .
+frontend code will access data from api calls.
+
+SPRING MVC USES : 
+	In Model 2 Architecture with Front Controller, all requests flow into a central controller called as Front Controller.
+	Front Controller controls flow to Controllers and Views. Common features can be implemented in the Front Controller.
+	
+	SPRING MVC front controller is the dispatcher servlet 
+	It recieves all requests and direct them to the right controller and view.

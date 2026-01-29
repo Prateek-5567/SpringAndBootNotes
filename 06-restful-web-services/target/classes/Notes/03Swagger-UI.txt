@@ -1,0 +1,38 @@
+	# SPRINGDOC-OPENAPI  
+{for now i have commented it in pom.xml uncomment to use.}
+
+1. Introduction
+springdoc-openapi java library helps to automate the generation of API 
+documentation using spring boot projects. 
+springdoc-openapi works by examining an application at runtime to
+infer API semantics based on spring configurations, class structure 
+and various annotations.
+
+Automatically generates documentation in JSON/YAML and HTML format APIs.
+This documentation can be completed by comments using swagger-api annotations.
+
+2. add this dep : kuch nahi karna bas dependency add karni h 
+<dependency>
+	<groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	<version>2.7.0</version>
+</dependency>
+
+3. paths : 
+goto - localhost:8080/swagger-ui/index.html - frontend of swagger.
+goto - localhost:8080/v3/api-docs   -  documentation of your application.
+
+your documentation has 5 major parts : 
+	-openapi
+	-info
+	-servers
+		- info where your api is exposed at.
+	-paths
+		- under paths all your restApi paths are mentioned.
+	-components
+		- here schema of your application is defined (schema of user).
+		
+
+	swagger-ui/index.html provides a highly interactive ui for diffrent paths of your backend RestApis 
+		there might be 100s of api paths under same project so that becomes easy to manage here.
+		you can also try out diffrent api calls through swagger-ui 

@@ -1,0 +1,36 @@
+Lets Create Post api.
+
+define post class
+
+a User can have multiple posts so there exists one-to-many-relationship from User to post
+
+in User.java create post field and mention one-to-many-relationship 
+- mapping of OneToMany from user to posts is done on User field present in posts
+-> from OneToMany : "List<Post> posts" of User.java  to    "User user"   of Post.java
+-> and ManyToOne viceversa.
+
+concept : 
+Hibernate does not use your Java variable name as the DB column name for relationships.
+For @ManyToOne, it auto-generates the foreign key column as:
+	
+	<fieldName>_<referencedPrimaryKey>
+	
+	So when you wrote:
+	
+	private User user_id;
+
+	Hibernate created something like:
+	
+	user_id_id	
+	
+	And If you write User user; in post.java -> the corresponding column in db will be created based on relationship mapping
+	user_id  `fieldName_referencedPrimaryKey ` 
+	
+Just because of this mapping a relationship between post and users is established
+now if you want posts of a specific user
+	NOO WORK REQUIRED
+	SPRING AUTOMATICALLY FETCHES POSTS FOR A USER AND SAVE IN LIST<POST> POSTS;
+	USER JUST CREATE A POST A CODER SIT BACK AND RELAX AS THAT POST WILL BE AUTO MAPPED WITH USER JISKI VO POST HAI.
+	
+
+	

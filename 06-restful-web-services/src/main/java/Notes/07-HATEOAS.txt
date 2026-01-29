@@ -1,0 +1,38 @@
+HATEOAS - Hypermedia as the Engine of Application State.
+
+websites allow you to not only see data but also perform actions(using links).
+
+How about enhancing you api to tell consumers how to perform subsequent actions.
+	-	here comes hateoas.
+
+Implementation Options : 
+	1 : Coustom format and implementation
+		- One class dependent on other class that is further dependent on other class 
+		will from object like 
+			i.e complicated.
+	
+	2 : Use Standard Implementation :
+		   *HAL : Json Hypertext Application Language
+		   	- it is a consistent format that gives you consistent and easy was to hyperlink between resources in your api
+		   	
+		   *Spring Hateoas : Generates HAL responses with hyperlink to responses.
+			  		
+when user request for specific user I want to provide a link to all users using hateoas.
+
+		some imp concepts of hateoas.
+		
+		1. Entity Builder : a simple EntityModel for wrapping a domain object and adding links to it thats it.
+			- first we need to wrap the user with entity in our response
+			- i.e HATEOS return EntityModel<user> as response this enables it to add links.
+		2. Web MVC Link Builder : for building the actual links that can be added to EntityModel's object.
+			-- we need two methods of WebMVCLinkBuilder - linkTo and methodOn
+			
+	the core lines are : 
+			
+		EntityModel<User> entityModel = EntityModel.of(user); 				        // so we made an EntityModel of user object.
+		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).getAllUsers() );  // this creates a link to findAll() method.
+		entityModel.add(link.withRel("all-users")); 
+			
+	Implemented in UserController.java  on  users/{id} url.
+		
+	

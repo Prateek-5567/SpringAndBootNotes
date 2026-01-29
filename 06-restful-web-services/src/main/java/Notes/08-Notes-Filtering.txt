@@ -1,0 +1,36 @@
+coustomising your Responses - Filtering and more.
+
+in some methods like : UserController -> getAllUsers -> here we are returning list of users back
+									  -> getSpecificUser -> returns entityModel object.
+						-> but on web we get Json response.
+						this is called serialization : bean to json conversion.
+						
+most popular serialization : jackson
+
+How about coustomizing the response returned by jackson	
+
+a. Coustomising field names 				(fields means attributes/data)
+	eg. in User class you define the domain object there,
+		instead of dob I wanna display dateOfBirth on api response.
+		just use : @JsonProperty("dateOfBirth") annotation.
+				
+b. Filtering : when you want to return selected fields.
+	eg. you have an password attribute but you dont want it to be sent in response.
+	Under Filtering you have two types of filtering - static filtering and dynamic filtering.
+	
+	b1. Static Filtering : same filtering for a bean across diffrent api. 
+						-applicable to all yours api's together.
+		use : @JsonIgnoreProperties , @JsonIgnore
+		@JsonIgnore - used annotating over the field that is to be filtered out of JsonResponse.
+		@JsonIgnoreProperties : annotated on a class and mention the properties in ("--","--") that are to be ommited.
+	
+	b2. Dynamic Filtering : to ignore a bean in specific api.
+					      eg. do not show id of username in /users api.
+		use : @JsonFilter with filter provided.
+		-> it is api specific so logic needs to be defined in Controller.
+		-> 90% logic is in some method in controller
+		-> 10% : put @JsonFilter("someFilterName") on the class which you wanna connect with.
+		
+eg : FilteringController.java
+	SomeBean.java 	
+			

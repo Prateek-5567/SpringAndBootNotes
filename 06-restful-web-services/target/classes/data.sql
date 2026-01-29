@@ -1,0 +1,20 @@
+-- you should not initialize mysql cuz it is permanent storage so req diff primaryKey everytime.
+
+--insert into user_details
+--values(current_date(),1001,'Aman');
+--
+--insert into user_details
+--values(current_date(),1002,'Amit');
+--
+--insert into user_details
+--values(current_date(),1003,'Anirudh');
+--
+--insert into post(id,description,user_id)
+--values(101,'Hey There , Recently Been to Kwait , Never Seen a country Richer that this before',1001);
+---- why user_id even if Post.java says just user. goto 11_notes.
+--
+--insert into post(id,description,user_id)
+--values(102,'Hey There , Recently Been to NewZealand , Never Seen a Stunning Nature like this',1002);
+--
+--insert into post(id,description,user_id)
+--values(103,'Hey There , Recently Been to England , Never Seen a Theif like this.',1002);

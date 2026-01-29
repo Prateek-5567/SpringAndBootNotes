@@ -1,0 +1,136 @@
+to setUp new docker image
+
+docker run --detach
+ --env MYSQL_ROOT_PASSWORD=123456   
+ --env MYSQL_USER=social-media-user
+ --env MYSQL_PASSWORD=dummypassword 
+ --env MYSQL_DATABASE=social-media-database 
+ --name mysql-user-project 			-- the name of the container is this.
+ --publish 3307:3306				-- HostPort : DockerContainerPort
+  mysql:8-oracle		- this is the name of the complete image
+  	
+    ##################################################
+    
+in terminal write this command in single line this way : 
+
+docker run --detach --env MYSQL_ROOT_PASSWORD=123456 --env MYSQL_USER=social-media-user --env MYSQL_PASSWORD=dummypassword --env MYSQL_DATABASE=social-media-database --name mysql-user-project --publish 3307:3306 mysql:8-oracle
+
+or this way : 
+
+	docker run --detach \
+	  --env MYSQL_ROOT_PASSWORD=123456 \
+	  --env MYSQL_USER=social-media-user \
+	  --env MYSQL_PASSWORD=dummypassword \
+	  --env MYSQL_DATABASE=social-media-database \
+	  --name mysql-user-project \
+	  --publish 3307:3306 \
+	  mysql:8-oracle
+	  
+	 
+  ##################################################
+   --publish 3307:3306 : 
+   
+  This means port mapping between host and container.
+	
+	General form:
+	
+	--publish HOST_PORT:CONTAINER_PORT
+	
+	
+	So:
+	
+	--publish 3307:3306
+	
+	means:
+	
+	My laptop (host) port 3307 → forwards traffic to
+	MySQL inside Docker container on port 3306( always 3306 ).
+	
+	  ##################################################
+	
+	
+	1. MYSQL_ROOT_PASSWORD
+		--env MYSQL_ROOT_PASSWORD=123456
+		
+		This sets the password for:
+		
+				root@localhost
+		
+		This is the superuser of MySQL.
+		
+		Use case:
+			Full admin access
+			Create/drop databases
+			Create users (currently we have one USER of this database - MYSQL_USER=social-media-user)
+			Migrations
+			Emergency access
+			
+	2. MYSQL_USER
+		- this user stands for user of our MySql-DB ;
+		-Your application uses this user account(user/pass) to interact with this DB.
+		
+		--env MYSQL_USER=social-media-user
+		
+		This creates a normal database user.
+		
+		Use case
+		
+		This is what your application should use.
+		
+		Never use root in production.
+
+	MYSQL_USER has nothing to do with your application’s business users.
+	
+	It is a database login account, not an app user.
+	
+	Two completely different “users” (you are mixing them)
+	*. Database user (infrastructure level)
+		MYSQL_USER=social-media-user
+		Means:
+		One technical account that your Spring Boot app uses to connect to MySQL.
+		This is like:
+		JDBC username/password
+		There is usually exactly one per application.
+		
+				
+	3. MYSQL_PASSWORD
+		--env MYSQL_PASSWORD=dummypassword
+		
+		Password for MYSQL_USER.
+		So:
+		social-media-user / dummypassword
+		is your app login.
+		
+		
+	we need a Username and password of MySql User 
+	because DB is diffrent service and our application is diffrent service.
+	
+	MySql DB can have multiple Users using the same database but it usually has one per container.
+	
+	for now I have created a user with username = social-media-user , userpassword=dummypassword
+	
+	to connect a user with MySql container.
+	
+
+application.properties 
+	 
+	# below content is for initializing my-sql. 
+	spring.datasource.url = jdbc:mysql:localhost:3307/social-media-database 		- this port is the host port followed by databaseName.
+	spring.datasource.username= social-media-user
+	spring.datasource.password= dummypassword
+	spring.jpa.properties.hibernate.dialect = 
+	
+-- If database in in memory db like h2 then spring auto creates tables for users and posts
+	but not for mysql. you need to allow it to do so using properties :
+	
+	spring.jpa.hibernate.ddl-auto = update
+	 
+			
+			
+		
+			
+			
+			
+						
+						
+						

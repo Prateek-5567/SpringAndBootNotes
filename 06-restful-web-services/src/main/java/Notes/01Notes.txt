@@ -1,0 +1,36 @@
+#PathParameter : they are the variable values in your url.
+some urls are like : `users/{id}/todos/{id}` 	eg: 	`users/3/todos/120`
+/06-restful-web-services/src/main/java/com/Prateek/rest/webservices/restful_web_services/HelloWorld/HelloWorldController.java
+contains example of builiding a simple url accepting path parameter.
+@PathVariable annotation is used to capture path parameters.
+
+
+We can manage our coustom responses.
+eg1. : Post request in UserController. 
+		return EntityResponse.created(location).build();
+		
+we Can handle the white label error page that we get on 404 code i.e page not exists error.
+
+- when the code is sent to producion then a jar file is created and sent 
+  in that jar file the devtools dependency is unabled cuz it is no longer needed in production.
+  
+-> We need to add : spring-boot-starter-validation dependency to implement validation 
+
+# Error handling :  (also in notebook) 
+-> we need a custom class that extends this ResponseEntityExceptionHandler abstract class to customize error handling.
+-> We also need our custom errorDetails class to customise the storage of ErrorDetails.
+-> HandleMethodArgumentNotValid is a method in ResponseEntityExceptionHandler class to handle invalid inputs or arguments.
+-> HandleUserNotFoundException is used for NotFound(404) error handling.
+-> ResponseEntity<> is an entity used to return response.
+
+-> If you want to understand some code and face hard keywords just hover on them
+	- 99% concept will get cleared about that file.
+
+## 2025 Updates in spring.
+spring 3.5.x to 4.x 
+ 
+spring-boot-starter-web  ->  spring-boot-starter-webmvc
+spring-boot-starter-test ->  spring-boot-starter-webmvc-test  (test is now specific to webmvc or data)
+						 ->  spring-boot-started-data-test 
+spring-boot-starter-data-jpa - no change.
+
