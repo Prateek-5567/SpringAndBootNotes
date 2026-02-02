@@ -1,0 +1,142 @@
+package com.Project.Todo.Hello;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+see I just want to create a api mapping for "sayHello" => "Hello what are you doing today!"
+ for creating a url  from  spring it must be @RestController annotated
+
+This is one way : => this way rest-api is created .
+
+@RestController
+public class SayHelloController {
+	
+	@RequestMapping("/sayHello")
+	public String sayHello() {
+		return "Hello what are you doing today!";
+	}
+}
+
+
+
+@Controller		// We wanted spring to manage this ; we wanted spring to handle web request to that is done using Some Controller (for Rest-Api => RestController)
+public class SayHelloController{
+	
+	@RequestMapping("/sayHello")
+	@ResponseBody
+	public String sayHello() {
+		return "Hello what are you doing today!";
+	}
+	
+	@RequestMapping("/sayHello-Html")
+	@ResponseBody
+	public String sayHelloHtml() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html>\n");
+		sb.append("<head>\n");
+		sb.append("<title>My Page</title>\n");
+		sb.append("</head>\n");
+		sb.append("<body>\n");						//  =>  /n is optional.
+		sb.append("<h1>Welcome</h1>\n");
+		sb.append("<p>This is a sample HTML page.</p>\n");
+		sb.append("</body>\n");	
+		sb.append("</html>");
+
+		return sb.toString();
+	}
+	
+	// the file is here:  src/main/resources/META-INF/resources/WEB-INF/jsp/sayHello.jsp
+	@RequestMapping("sayHello-jsp")
+	public String sayHelloJsp() {
+		return "sayHello"; 		
+		// it goes and renders sayHello file directly but how does it knows the path? =>  from application.properties  
+	}
+	
+	// if you use @ResposneBody here then the content is directly printed on webpage web dont want that .
+		
+	
+}
+//        ############### NOTES DOWN / #################
+
+
+/*
+ * ResponseBody :=> when function returns a string it is not retured as ease 
+ * SpringMVC looks for a view which it will not find as String is not returned as ease
+ * ResposneBody indicates that method return value should be bound to web page's body. return value as ease.
+ */
+
+/*
+ * 1. What is StringBuffer?
+
+		StringBuffer is a mutable sequence of characters in Java.
+		
+		Unlike String, it can be modified
+		
+		It is thread-safe (synchronized)
+		
+		Used when multiple threads modify the same string
+		
+			StringBuffer sb = new StringBuffer("Hello");
+			sb.append(" World");
+			System.out.println(sb); // Hello World
+
+
+ * 2. Why does StringBuffer exist?
+
+		Because String is immutable.
+		
+			String s = "Hello";
+			s.concat(" World");   // creates a new object of combined values i.e internally another string = "Hello World" is created.
+		
+		
+		This wastes memory in loops or heavy string manipulation.
+		
+		StringBuffer solves this by modifying the same object.
+ */
+
+/*
+ * JSP (JavaServer Pages) — clear, structured explanation
+1. What is JSP?
+
+	JSP (JavaServer Pages) is a server-side view technology used to generate dynamic HTML in Java web applications.
+	
+	In simple terms:
+	
+	JSP = HTML + embedded Java code executed on the server
+	
+	The browser never sees Java.
+	It only receives final HTML.
+	
+ 2. How JSP actually works (VERY IMPORTANT)
+
+	JSP is NOT executed directly.
+	
+	Flow:
+	
+		Client requests a .jsp page
+		
+		Server converts JSP into a Servlet
+		
+		Servlet is compiled
+		
+		Servlet executes
+		
+		Generated HTML is sent to browser
+	
+	So internally:
+	
+		JSP → Servlet → HTML
+		
+
+	IF YOU WANT TO RUN JSP CODE YOU NEED - spring-embed-jasper dependency
+ */
+
+
+
+Spring View Resolver : when your RequestMapping("--") method in Controller Class returns a String ;
+					 Spring internally calls Spring View Resolver 
+					 that maps the prefix and suffix from application.properties.
+
+
+
+

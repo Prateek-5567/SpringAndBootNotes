@@ -1,0 +1,35 @@
+`form:` is a Spring MVC JSP tag library prefix.
+
+Q:	What it is from: tag ? Why it is used? Where does it come from?
+	
+	form: comes from Spring Form Tag Library
+	
+	It is enabled using:
+	
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+Q:	Why it is used
+	
+	To bind JSP form fields directly to a Java model object (command/DTO/bean).
+	
+	It enables two-way data binding between the form and the model.
+
+Q:	What it does here
+
+	modelAttribute="todo" → links the form to a Todo object in the controller.
+	
+	path="description" → maps this input field to todo.getDescription() / setDescription().
+	
+	Automatically:
+	
+	Pre-fills existing values (useful for update forms)
+	
+	Binds submitted data back to the object
+	
+	Displays validation errors via <form:errors>
+	
+	In one line
+	
+	form: tags are used to connect JSP forms directly with Spring controller model objects with automatic data binding and validation support.
+	
+	If you use plain HTML <input>, you lose automatic binding and error handling.

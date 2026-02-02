@@ -1,0 +1,146 @@
+Q: can you tell me how is this linking happening of Todo.java class TodoController methods and updateTodoPage.jsp 
+
+This is a very good question.
+If you understand this, Spring MVC stops feeling like “magic”.
+It alone can clear your most of SpringMVC concepts.
+
+1️⃣ THE THREE ACTORS
+
+You have three things:
+
+	Todo.java → plain Java object (data holder)
+	TodoController → request handler
+	updateTodo.jsp → view (form)
+
+They are not directly linked to each other.
+👉 The linking is done by Spring MVC infrastructure, not by your code.
+
+
+2️⃣ ENTRY POINT: HTTP REQUEST
+Example URL:
+	/update-todo?id=3	
+	Tomcat receives the request → hands it to DispatcherServlet.
+
+3️⃣ DISPATCHERSERVLET (THE BRAIN)
+
+DispatcherServlet does the following:
+	Finds the matching controller method for url.
+	Calls that method
+	Collects:
+	Model data
+	View name
+	Forwards to the JSP
+	
+This is the Front Controller pattern.
+
+
+4️⃣ CONTROLLER → MODEL LINK (CRITICAL STEP)
+
+Controller (GET)
+		@GetMapping("update-todo")
+		public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+		    Todo todo = todoService.findById(id);
+		    model.put("todo", todo);
+		    return "updateTodo";
+		}
+
+What happens here
+
+	todoService.findById(id) returns a Todo object
+	model.put("todo", todo) stores it in the Model
+	Key name = "todo"
+	ModelMap is a HashMap maintained by SpringMVC
+This is the only place where the link is created.
+
+
+5️⃣ MODEL → JSP LINK (modelAttribute)
+	
+	In updateTodo.jsp:
+	
+		<form:form modelAttribute="todo">
+	
+	This line means:
+				“Spring, give me the object named todo from the model.”
+	
+	Spring does this internally:
+				model.get("todo") → Todo object
+	
+	Now the JSP has access to the Todo instance.
+
+6️⃣ TODO → FORM FIELD LINK (through path attribute)
+	
+		<form:input path="description"/>
+	
+	This means:
+		Look for getDescription() on the Todo object
+	
+	Use its value to prefill the input
+	
+	So:
+		todo.getDescription() → input value ( preFilled value comes from here )
+	
+	This way using todo.get_() all inputs fields are mapped directly to Todo class attributes
+	This is object → view binding. ( MOST IMPORTANT ) 
+
+7️⃣ FORM SUBMIT: JSP → CONTROLLER LINK (2nd Most Imp)
+	
+	User clicks Update → POST request sent.
+	
+	Payload example:
+	
+		id=3
+		description=Learn Spring MVC
+		done=true
+
+8️⃣ SPRING BINDS FORM BACK TO TODO
+
+  Controller POST method:
+
+	@PostMapping("update-todo")
+	public String updateTodo(
+	        @Valid @ModelAttribute("todo") Todo todo,
+	        BindingResult result
+	) { 
+			What Spring does internally:
+			
+			Creates a Todo object
+			
+			Calls:
+				setId(3)
+				setDescription("Learn Spring MVC")
+				setDone(true)
+				
+			Runs validation
+			
+			Stores errors in BindingResult }
+			
+			This is also view → object binding.
+
+9️⃣ WHY JSP STILL KNOWS ABOUT ERRORS
+
+In JSP:
+
+	<form:errors path="description"/>
+
+Spring:
+	
+	Finds BindingResult for "todo"
+	
+	Finds errors for description
+	
+	Renders them
+	
+	No manual wiring needed.
+
+🔁 COMPLETE LINKING LOOP (MEMORIZE THIS)
+	Request
+		 1→ DispatcherServlet
+		 2→ Controller
+		 3→ Model ("todo")
+		 4→ JSP (modelAttribute)
+		 5→ path → getters
+		 6→ Form Submit
+		 7→ setters
+		 8→ Validation
+		 9→ BindingResult
+		 10→ JSP errors

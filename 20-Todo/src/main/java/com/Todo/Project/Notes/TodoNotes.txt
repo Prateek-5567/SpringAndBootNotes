@@ -1,0 +1,38 @@
+@RequestMapping(value="add-todo",method=RequestMethod.POST)
+	public String addTodoPost(ModelMap model,@RequestParam String todoDesc) { 	//  this todoDesc is a from parameter so @RequestParam will pick it from payload. // when from submit to POST request there is a data Payload.
+		String UserName= (String)model.get("username");
+		todoService.addTodo(UserName, todoDesc, LocalDate.now().plusYears(1), false);
+		return "redirect:list-todos";
+	} 
+	
+	currently I have one field only ( desc) on add-todo page so 
+	I need to use this : @RequestParam String todoDesc
+	only once 
+	What if there are many fields then we need to use diffrent concept : Command Bean => two Way Binding
+	we will bind Todo class directly with addTodoPage.jsp use a CommandBean in between whose code is written in our TodoController.
+	
+	
+ => Jasper is Apache Tomcat’s JSP compiler and runtime engine.
+
+		Precisely:
+			JSP files (.jsp) are not executed directly.	
+			Jasper translates JSP → Java Servlet, then compiles that servlet, then Tomcat runs it.
+			Any JSP syntax error, tag error, or taglib misuse is detected by Jasper at compile time.
+			
+=> Two Way Binding , Command Bean Feature is provided by Spring MVC. 
+	1️⃣ Spring Form Tag Library
+		<form:form modelAttribute="todo">
+		<form:input path="description"/>
+		
+	These tags are Spring MVC features, not JSTL.
+	Two Way binding Maps your input fields on frontend directly to you Java Class (here Todo.java) that create actual objects
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

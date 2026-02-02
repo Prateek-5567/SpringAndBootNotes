@@ -1,0 +1,8 @@
+You just need to add
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	
+	then automatically security is applied to your web pages
+	Spring wont allow you to open any page on your application until you are logged in.

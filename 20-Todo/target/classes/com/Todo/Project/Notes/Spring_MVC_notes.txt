@@ -1,0 +1,78 @@
+1️⃣ Front Controller Architecture (DispatcherServlet)
+	Uses a single DispatcherServlet to handle all HTTP requests
+	Centralizes:
+		Routing
+		Validation
+		Exception handling
+		View resolution
+	This enforces clean separation of concerns.
+
+2️⃣ Annotation-Based Request Mapping
+	@Controller, @RequestMapping, @GetMapping, @PostMapping
+	Maps URLs to handler methods declaratively
+	No XML required (modern Spring)
+
+3️⃣ Model–View–Controller Separation
+	Model → contains business data
+	View → defined in JSP
+	Controller → manages request handling logic
+	Prevents tight coupling between UI and business logic.
+
+4️⃣ Two-Way Data Binding
+
+	Automatically binds HTTP request parameters to Java objects
+	Uses JavaBean getters/setters
+	Implemented via WebDataBinder ( webPage - to - internal Data binder)
+
+	Example:
+		description = abc → todo.setDescription("abc") is done internally automatically.
+
+5️⃣ Form-Backing Objects (Command Objects)
+	Forms are backed by POJOs (Todo)
+	Enables:
+		Prefilling forms
+		Easy updates
+		Validation integration
+
+6️⃣ Validation Integration (JSR-303 / Bean Validation)
+	Supports annotations like @NotBlank, @Size
+	@Valid triggers validation
+	Errors exposed via BindingResult
+	Works seamlessly with forms.
+
+7️⃣ Flexible View Resolution
+
+Supports:
+	JSP
+	Thymeleaf
+	FreeMarker
+	JSON / XML
+	Controlled via ViewResolver
+	Same controller → different views.
+
+8️⃣ Exception Handling
+
+Local:
+	@ExceptionHandler
+	Global:
+		@ControllerAdvice
+		Clean, centralized error handling.
+
+9️⃣ RESTful Web Services Support
+	@RestController or @Controller
+	@ResponseBody => directly display output on webpage . 
+	Automatic JSON serialization via Jackson ; Bean to Json and viceversa.
+	Same MVC core used for REST APIs.
+
+🔟 Loose Coupling via Dependency Injection
+
+	Controllers depend on interfaces, not implementations
+	
+	Enables testability and maintainability
+
+1️⃣1️⃣ Security Integration
+
+	Seamless integration with Spring Security
+	Authentication and authorization hooks
+	ONE-LINE INTERVIEW ANSWER
+	“Spring MVC provides a front-controller-based web framework with annotation-driven request handling, data binding, validation, view resolution, and REST support.”

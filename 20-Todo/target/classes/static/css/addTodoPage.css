@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerr {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    padding: 32px;
+    border-radius: 16px;
+    width: 500px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #d1d5db;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.4);
+}
+
+button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    background: #6366f1;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4f46e5;
+}
+.error {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 8px;
+    display: block;
+}
+.form-group {
+    margin-bottom: 16px;
+}
+
+select.input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    font-size: 14px;
+    background-color: #fff;
+    outline: none;
+    appearance: none;          /* removes ugly native styling */
+}
+
+select.input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.4);
+}

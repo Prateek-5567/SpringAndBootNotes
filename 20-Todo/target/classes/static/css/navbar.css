@@ -1,0 +1,73 @@
+.app-navbar {
+  display: flex;
+  align-items: center;          /* vertical centering */
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;      /* increased height */
+  background: linear-gradient(
+    180deg,
+    #0a151a 0%,
+    #182732 50%,
+    #233645 100%
+  );
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Left group: brand + links */
+.app-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;                  /* spacing between Prateek / Home / Todos */
+}
+
+/* Right group: logout */
+.app-navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Brand text */
+.app-navbar-brand {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+
+/* Links */
+.app-nav-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.app-nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.app-nav-link.logout {
+  font-weight: 500;
+}
+
+/* Optional: responsive tweak */
+@media (max-width: 768px) {
+  .app-navbar {
+    flex-wrap: wrap;
+  }
+
+  .app-navbar-left,
+  .app-navbar-right {
+    margin-top: 0.5rem;
+  }
+
+  .app-navbar-right {
+    margin-left: auto;
+  }
+}
